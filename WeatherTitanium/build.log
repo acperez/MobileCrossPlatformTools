@@ -1,0 +1,104 @@
+Logfile initialized
+[INFO] logfile = D:\workspace\titanium\Weather\build.log
+[DEBUG] C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\builder.py install WeatherTitanium C:\Program Files\Java\android D:\workspace\titanium\Weather es.tid.titanium.weather 2
+[INFO] Titanium SDK version: 1.7.2 (07/21/11 09:36 97c3689)
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.013000 seconds on emulator to get ready
+[DEBUG] es.tid.titanium.weather installed? False
+[INFO] Copying project resources..
+[INFO] Detected tiapp.xml change, forcing full re-build...
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\android\icon.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\icon.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\app.js => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\app.js
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\alert_button.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\alert_button.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\alert_button_android.9.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\alert_button_android.9.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\bg_gradient.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\bg_gradient.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\city.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\city.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\gps_location.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\gps_location.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\help_bg.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\help_bg.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\help_bg_android.9.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\help_bg_android.9.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\list_bg.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\list_bg.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\list_bg_android.9.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\list_bg_android.9.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading.gif => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading.gif
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading_1.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading_1.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading_2.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading_2.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading_3.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading_3.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading_4.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading_4.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading_5.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading_5.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading_6.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading_6.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading_7.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading_7.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\loading_8.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\loading_8.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\popup_full_bright.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\popup_full_bright.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\popup_full_bright_android.9.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\popup_full_bright_android.9.png
+[TRACE] COPYING CREATED FILE: D:\workspace\titanium\Weather\Resources\images\splash_logo.png => D:\workspace\titanium\Weather\build\android\bin\assets\Resources\images\splash_logo.png
+[TRACE] Generating Java Classes
+[DEBUG] Processing Android resource drawables
+[DEBUG] copying app icon: D:\workspace\titanium\Weather\build\android\bin\assets\Resources\icon.png
+[DEBUG] generating theme.xml
+[DEBUG] copying default splash screen
+[TRACE] Writing out AndroidManifest.xml
+[DEBUG] adding D:\workspace\titanium\Weather\build\android\gen\es\tid\titanium\weather\R.java to javac build list
+[DEBUG] adding D:\workspace\titanium\Weather\build\android\gen\es\tid\titanium\weather\WeathertitaniumActivity.java to javac build list
+[DEBUG] adding D:\workspace\titanium\Weather\build\android\gen\es\tid\titanium\weather\WeathertitaniumAppInfo.java to javac build list
+[DEBUG] adding D:\workspace\titanium\Weather\build\android\gen\es\tid\titanium\weather\WeathertitaniumApplication.java to javac build list
+[DEBUG] Building Java Sources: "D:\\workspace\\titanium\\Weather\\build\\android\\gen\\es\\tid\\titanium\\weather\\R.java" "D:\\workspace\\titanium\\Weather\\build\\android\\gen\\es\\tid\\titanium\\weather\\WeathertitaniumActivity.java" "D:\\workspace\\titanium\\Weather\\build\\android\\gen\\es\\tid\\titanium\\weather\\WeathertitaniumAppInfo.java" "D:\\workspace\\titanium\\Weather\\build\\android\\gen\\es\\tid\\titanium\\weather\\WeathertitaniumApplication.java"
+[INFO] Compiling Android Resources... This could take some time
+[DEBUG] Android classes.dex built
+[DEBUG] creating unsigned apk: D:\workspace\titanium\Weather\build\android\bin\app-unsigned.apk
+[DEBUG] from resource zip => assets/Resources/images/alert_button.png
+[DEBUG] from resource zip => assets/Resources/images/alert_button_android.9.png
+[DEBUG] from resource zip => assets/Resources/images/bg_gradient.png
+[DEBUG] from resource zip => assets/Resources/images/city.png
+[DEBUG] from resource zip => assets/Resources/images/gps_location.png
+[DEBUG] from resource zip => assets/Resources/images/help_bg.png
+[DEBUG] from resource zip => assets/Resources/images/help_bg_android.9.png
+[DEBUG] from resource zip => assets/Resources/images/list_bg.png
+[DEBUG] from resource zip => assets/Resources/images/list_bg_android.9.png
+[DEBUG] from resource zip => assets/Resources/images/loading.gif
+[DEBUG] from resource zip => assets/Resources/images/loading_1.png
+[DEBUG] from resource zip => assets/Resources/images/loading_2.png
+[DEBUG] from resource zip => assets/Resources/images/loading_3.png
+[DEBUG] from resource zip => assets/Resources/images/loading_4.png
+[DEBUG] from resource zip => assets/Resources/images/loading_5.png
+[DEBUG] from resource zip => assets/Resources/images/loading_6.png
+[DEBUG] from resource zip => assets/Resources/images/loading_7.png
+[DEBUG] from resource zip => assets/Resources/images/loading_8.png
+[DEBUG] from resource zip => assets/Resources/images/popup_full_bright.png
+[DEBUG] from resource zip => assets/Resources/images/popup_full_bright_android.9.png
+[DEBUG] from resource zip => assets/Resources/images/splash_logo.png
+[DEBUG] from resource zip => assets/Resources/app.js
+[DEBUG] from resource zip => assets/Resources/icon.png
+[DEBUG] from resource zip => assets/tiapp.xml
+[DEBUG] from resource zip => res/drawable/appicon.png
+[DEBUG] from resource zip => res/drawable/background.png
+[DEBUG] from resource zip => res/layout/titanium_tabgroup.xml
+[DEBUG] from resource zip => AndroidManifest.xml
+[DEBUG] from resource zip => resources.arsc
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\smalljs.jar => org/mozilla/javascript/resources/Messages.properties
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\smalljs.jar => org/mozilla/javascript/resources/Messages_fr.properties
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/apache/Commons-NOTICE.txt
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/apache/HttpComponents-NOTICE.txt
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/apache/mime4j-NOTICE.txt
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/build.properties
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/background.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\modules\titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\modules\titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
+[DEBUG] from JAR C:\Users\acperez.HI\AppData\Roaming\Titanium\mobilesdk\win32\1.7.2\android\modules\titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
+[DEBUG] Waiting for device to be ready ...
+[TRACE] adb devices returned 1 devices/emulators
+[DEBUG] Device connected... (waited 0 seconds)
+[DEBUG] waited 0.012000 seconds on emulator to get ready
+[INFO] Installing application on emulator
+[INFO] Application installed. Launch from drawer on Home Screen

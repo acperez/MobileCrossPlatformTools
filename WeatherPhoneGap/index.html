@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<script type="text/javascript" charset="utf-8" src="phonegap-1.0.0.js"></script>
+		<script type="text/javascript" charset="utf-8" src="json.js"></script>
+		
+		<meta name="viewport" content="width=device-width; minimum-scale=1.0; maximum-scale=1.0; target-densityDpi=device-dpi; user-scalable=0">
+
+		<title>PhoneGap</title>
+		<style type="text/css">
+		
+			.css-grd {
+				/* default background colour, for all layout engines that don't implement gradients */
+				background: #2a6da9;
+
+				/* gecko based browsers */
+				background: -moz-linear-gradient(top, #00517a, #51c6d9);
+
+				/* webkit based browsers */
+				background: -webkit-gradient(linear, left top, left bottom, from(#00517a), to(#51c6d9));
+
+				color: #FFFFFF; /* text colour (black) */
+				padding: 0px; /* distance from border edge to text */
+			}
+			
+			html {height: 100%; margin:0px; padding:0px;}
+			body {height: 90%; margin:0px; padding:0px}
+			p {margin: 0;}
+			
+			td {padding:0px}
+			
+			div#splash{
+				height: 100%;
+			}
+			
+			div#help{
+				height: 100%;
+			}
+			
+			div#help_content{
+				font-size: 1.7em;
+				color: black;
+				border-width: 46px 68px 61px 52px;
+				-moz-border-image: url(img/help_bg.png) 46 68 61 52 stretch;
+				-webkit-border-image: url(img/help_bg.png) 46 68 61 52 stretch;
+				-o-border-image: url(img/help_bg.png) 46 68 61 52 stretch;
+				border-image: url(img/help_bg.png) 46 68 61 52 stretch;				
+			}
+			
+			div#toolbar{
+				position:fixed;
+				bottom:0;
+				left: 0;
+				width:100%;
+				height: auto;
+			}
+			
+			.btn_large {
+			    padding: 3px 0;
+			    width:100%;
+		        background: none repeat scroll 0 0 #444444;
+			    border: 4px solid #555555;
+			    border-radius: 10px 10px 0 0;
+			    color: #99AABB;
+			    font-size: 1.1em;
+			    text-align: center;
+			    text-decoration: none;
+			}
+			
+			div#popup{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+			}
+
+			div#popup_error{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+			}
+						
+			div#popup_content{
+				border-width: 19px 24px 28px 23px;
+				-moz-border-image: url(img/popup_full_bright.png) 19 24 28 23 stretch;
+				-webkit-border-image: url(img/popup_full_bright.png) 19 24 28 23 stretch;
+				-o-border-image: url(img/popup_full_bright.png) 19 24 28 23 stretch;
+				border-image: url(img/popup_full_bright.png) 19 24 28 23 stretch;
+			}
+			
+			.button{
+				border-width: 9px 8px;
+				-moz-border-image: url(img/alert_button.png) 9 8 stretch;
+				-webkit-border-image: url(img/alert_button.png) 9 8 stretch;
+				-o-border-image: url(img/alert_button.png) 9 8 stretch;
+				border-image: url(img/alert_button.png) 9 8 stretch;
+				
+				color: #767676;
+				font-weight: bold;
+				text-align: center;
+			}
+			
+			.list_item{
+				border-width: 9px 9px 9px 8px;
+				-moz-border-image: url(img/list_bg.png) 9 9 9 8 stretch;
+				-webkit-border-image: url(img/list_bg.png) 9 9 9 8 stretch;
+				-o-border-image: url(img/list_bg.png) 9 9 9 8 stretch;
+				border-image: url(img/list_bg.png) 9 9 9 8 stretch;
+			}
+		</style>
+		
+		<script type="text/javascript">
+		    var file_writer = null;
+		    var file_entry = null;
+		    var file_id = null;
+			var gpsId = null;
+			var request = false;
+			var init_time = null;
+			
+			function Init(){
+				LoadView();
+   				/*init_time = new Date().getTime();
+				document.addEventListener("deviceready", onDeviceReady, false);*/
+			}
+			
+		    function onDeviceReady() {
+		        window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFS, fail);
+		    }
+
+		    function gotFS(fileSystem) {
+		        fileSystem.root.getFile("weather.dat", {create: true}, gotFileEntry, fail);
+		    }
+	
+		    function gotFileEntry(fileEntry) {
+		    	file_entry = fileEntry;
+		    	file_entry.createWriter(gotFileWriter, fail);
+		    }
+		    
+		    function gotFileWriter(writer) {
+		    	file_writer = writer;
+		    	file_entry.file(gotFile, fail);
+		    }
+		    	    
+		    function gotFile(file){
+		        file_id = file;
+		        InitDone();
+		    }
+	
+		    function fail(error) {
+		    	InitDone();
+		    }
+		    
+		    function InitDone(){
+		    	var time = 4000 - (new Date().getTime() - init_time);
+		  		setTimeout("LoadView();", time);
+		    }
+			
+			function LoadView(){
+   		        //var reader = new FileReader();
+		        //reader.onloadend = function(evt) { 
+  		        	document.getElementById('splash').style.display = 'none';
+ 		        	document.getElementById('toolbar').style.display = 'block';
+  		        	//if(evt.target.result == ""){
+						 document.getElementById('help').style.display = 'block';
+ 					//}
+		        	//else{
+		        	//	document.getElementById('forecast').style.display = 'block';
+		        	//	ParseAndStore(evt.target.result);
+ 		        	//}
+		        //};
+		        
+		        //reader.readAsText(file_id);
+			}
+			
+			function GetGPSLocation(){
+				if(gpsId != null){
+					navigator.geolocation.clearWatch(gpsId);
+					gpsId = null;
+				}
+				gpsId = navigator.geolocation.watchPosition(onGetGPSLocationSuccess, onGetGPSLocationError, { frequency: 20000, timeout: 20000, enableHighAccuracy: true });
+			}
+			
+			function GetCityLocation(){
+				document.getElementById('popup').style.display = "block";
+				document.getElementById('toolbar').style.display = "none";
+			}
+			
+			function GetCityLocationOk(){
+				var city = document.getElementById('city_input').value;
+				document.getElementById('popup').style.display = "none";
+				document.getElementById('toolbar').style.display = "block";
+				UpdateData(city);
+			}
+			
+			function GetCityLocationCancel(){
+				document.getElementById('popup').style.display = "none";
+				document.getElementById('toolbar').style.display = "block";
+			}
+			
+			function PopupErrorOk(){
+				document.getElementById('popup_error').style.display = "none";
+			}
+			
+			function UpdateData(city){
+				var API_KEY = "6affebacbb125602110709";
+				var FORECAST_DAYS = "5";
+				var DATA_FORMAT = "json";
+				var url ="http://free.worldweatheronline.com/feed/weather.ashx?key=" + API_KEY + "&q=" + city + "&num_of_days=" + FORECAST_DAYS + "&format=" + DATA_FORMAT;
+				HttpGetForecast(url);
+			}
+			
+			function ParseAndStore(rawdata){
+				var data = eval("(" + rawdata + ")");
+				data = data.data;
+				if(data.error){
+					document.getElementById('popup_error').style.display = "block";
+					document.getElementById('error_message').innerHTML = "Unable to find any matching weather location to the query '" + document.getElementById('city_input').value + "'";
+					return;
+				}
+
+				var weatherLocal =new Object();
+				weatherLocal.city = data.request[0].query;
+				var tmp = data.weather;
+				weatherLocal.forecast = new Array();
+				for(i=0; i<tmp.length; i++){
+					weatherLocal.forecast[i] = new Object();
+					weatherLocal.forecast[i].date = tmp[i].date.split("-");
+					weatherLocal.forecast[i].date = weatherLocal.forecast[i].date[2] + "/" + weatherLocal.forecast[i].date[1] + "/" + weatherLocal.forecast[i].date[0];					
+					weatherLocal.forecast[i].iconUrl = tmp[i].weatherIconUrl[0].value;
+					weatherLocal.forecast[i].tempMin = tmp[i].tempMinC;
+					weatherLocal.forecast[i].tempMax = tmp[i].tempMaxC;
+					weatherLocal.forecast[i].condition = tmp[i].weatherDesc[0].value;
+				}
+
+				var tmp = data.current_condition[0];
+				weatherLocal.currentWeather = new Object();
+				weatherLocal.currentWeather.date = weatherLocal.forecast[0].date;
+				weatherLocal.currentWeather.cloudCover = tmp.cloudcover;
+				weatherLocal.currentWeather.pressure = tmp.pressure;
+				weatherLocal.currentWeather.temp = tmp.temp_C;
+				weatherLocal.currentWeather.humidity = tmp.humidity;
+				weatherLocal.currentWeather.iconUrl = tmp.weatherIconUrl[0].value;
+				weatherLocal.currentWeather.windspeed = tmp.windspeedKmph;
+				weatherLocal.currentWeather.condition = tmp.weatherDesc[0].value;
+				weatherLocal.currentWeather.tempMin = weatherLocal.forecast[0].tempMin;
+				weatherLocal.currentWeather.tempMax = weatherLocal.forecast[0].tempMax;
+
+				weather = weatherLocal;
+
+				//file_writer.write(rawdata);
+
+		        InitFromPreferences(weather);
+
+			}
+			
+			function InitFromPreferences(weather){
+				document.getElementById('city').innerHTML = weather.city;
+				document.getElementById('date').innerHTML = weather.currentWeather.date;
+				document.getElementById('temp').innerHTML = weather.currentWeather.temp + "ºC";
+				document.getElementById('currentIcon').src = weather.currentWeather.iconUrl;
+				document.getElementById('condition').innerHTML = weather.currentWeather.condition;
+				document.getElementById('min_temp').innerHTML = "Min temp: " + weather.currentWeather.tempMin + "ºC";
+				document.getElementById('max_temp').innerHTML = "Max temp: " + weather.currentWeather.tempMax + "ºC";
+				document.getElementById('pressure').src = "Pressure: " + weather.currentWeather.pressure + "mb";
+				document.getElementById('humidity').innerHTML = "Humidity: " + weather.currentWeather.humidity + "%";
+				document.getElementById('cloud_cover').innerHTML = "Cloud cover: " + weather.currentWeather.cloudCover + "%";
+				document.getElementById('wind_speed').innerHTML = "Wind speed: " + weather.currentWeather.windspeed + "km/h";
+
+				for(i=1; i<weather.forecast.length; i++){
+					document.getElementById('date' + (i)).innerHTML = weather.forecast[i].date;
+					document.getElementById('currentIcon' + (i)).src = weather.forecast[i].iconUrl;
+					document.getElementById('condition' + (i)).innerHTML = weather.forecast[i].condition;
+					document.getElementById('min_temp' + (i)).innerHTML = "Min temp: " + weather.forecast[i].tempMin + "ºC";
+					document.getElementById('max_temp' + (i)).innerHTML = "Max temp: " + weather.forecast[i].tempMax + "ºC";
+				}
+				
+				document.getElementById('help').style.display = 'none';
+        		document.getElementById('forecast').style.display = 'block';
+			}
+			
+			function HttpGetLocation(coordinates){
+				url="http://maps.google.com/maps/api/geocode/json?latlng=" + coordinates + "&sensor=true";
+				if(navigator.appName == "Microsoft Internet Explorer"){
+					try {
+						request = new ActiveXObject("Msxml2.XMLHTTP");
+					}
+					catch (e){
+						try{
+							request = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						catch (e){}
+					}
+				}else if (window.XMLHttpRequest) {
+					request = new XMLHttpRequest();
+				}
+				else {
+					return false;
+				}
+
+				request.onreadystatechange=function(){
+					if (request.readyState == 4){
+						if(request.status==200 || window.location.href.indexOf("http")==-1){
+							var location = eval('(' + request.responseText + ')');
+							UpdateData(location.results[0].address_components[2].long_name);
+						}
+						else{
+							alert("Connection error, please try later.");
+						}
+					}
+				}
+
+				request.open('GET', url, true);
+				request.send(null);
+			}
+			
+			var onGetGPSLocationSuccess = function(position) {
+				if(gpsId != null){
+					navigator.geolocation.clearWatch(gpsId);
+					gpsId = null;
+					alert(position.coords.latitude + "," + position.coords.longitude);
+					HttpGetLocation(position.coords.latitude + "," + position.coords.longitude);
+				}
+			};
+
+			function onGetGPSLocationError(error) {
+				if(gpsId != null){
+					navigator.geolocation.clearWatch(gpsId);
+					gpsId = null;
+			    	alert('Your location is temporarily unavailable');
+				}
+			}
+
+			function HttpGetForecast(url){
+				if(navigator.appName == "Microsoft Internet Explorer"){
+					try {
+						request = new ActiveXObject("Msxml2.XMLHTTP");
+					}
+					catch (e){
+						try{
+							request = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						catch (e){}
+					}
+				}else if (window.XMLHttpRequest) {
+					request = new XMLHttpRequest();
+				}
+				else {
+					return false;
+				}
+
+				request.onreadystatechange=function(){
+					if (request.readyState == 4){
+						if(request.status==200 || window.location.href.indexOf("http")==-1){
+							alert(request.responseText);
+							ParseAndStore(request.responseText);
+						}
+						else{
+							alert("Connection error, please try later.");
+						}
+					}
+				}
+				request.open('GET', url, true);
+				request.send(null);
+			}
+		</script>
+	</head>
+	<body class="css-grd" onload="javascript:Init()">
+		<div id="splash">
+			<table style="height: 100%; width: 100%">
+				<tr>
+					<td style="text-align: center">
+						<div>
+							<div id="title" style="font-size: 1.5em;">
+								<h1>Forecast<br/>Weather</h1>
+							</div>
+							
+							<div id="logo">
+								<img src="img/splash_logo.png"/>
+							</div>
+							
+							<div id="loading">
+								<img src="img/loading.gif" style="height: 4em; width: 4em">
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="help" style="display: none;">
+			<table style="height: 100%; width: 100%">
+				<tr>
+					<td style="vertical-align: middle;">
+						<div id="help_content">
+							<p>There is no location preference saved.</p>
+							<p>In order to choose a location push the 'menu' button to set a location using the GPS or typing one city.</p>
+							<p>Preferences will be stored automatically when you set one location.</p>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="forecast" style="display: none;">
+			<p id="city" style="font-size: 2.3em; padding: 0.5em 0 0.5em 0">Barcelona, Spain</p>
+			<div>
+				<div style="float: left; padding-left: 1em;">
+					<p id="date" style="font-size: 1.4em; padding-top: 0.2em">29/09/2011</p>
+					<p id="temp" style="font-size: 2em; padding-top: 0.1em">25ºC</p>
+				</div>
+				<p style="float: right; padding-right: 1em;"><img id="currentIcon" src="http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"/></p>
+			</div>
+			<p id="condition" style="clear: both; font-size: 1.4em; padding: 1em 0 1em 0.8em">Sunny</p>
+			<div style="font-size: 1.4em; padding: 0 0 0.7em 0.8em">
+				<p id="min_temp" style="float: left; width: 48%">Min temp: 18ºC</p>
+				<p id="max_temp" style="float: left; width: 48%">Min temp:26ºC</p>
+			</div>
+			<div style="clear: left; font-size: 1.4em; padding: 1em 0 0.7em 0.8em">
+				<p id="pressure" style="float: left; width: 48%">Pressure: 1022mb</p>
+				<p id="humidity" style="float: left; width: 48%">Humidity: 69%</p>
+			</div>
+			<div style="clear: left; font-size: 1.4em; padding: 1em 0 0.7em 0.8em">
+				<p id="cloud_cover" style="float: left; width: 48%">Cloud cover: 25%</p>
+				<p id="wind_speed" style="float: left; width: 48%">Wind speed: 30km/h</p>
+			</div>
+			<div style="clear: left;"></div>
+			<div class="products" style=" width: 100%; height: 100%; color: black; margin-top: 1.5em; overflow: hidden">
+				<div class="list_item">
+					<table style="width: 100%;">
+						<tr><td style="vertical-align: middle;">
+							<p id="date1" style="font-size: 1.3em">29/09/2011</p>
+						</td><td style="text-align: right;">
+							<img id="currentIcon1" src="http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png" style="vertical-align: middle;"/>
+						</td></tr>
+					</table>
+					<p id="condition1" style="font-size: 1.3em">Sunny</p>
+					<div style="padding-top: 0.5em">
+						<p id="min_temp1" style="float: left; font-size: 1.3em">Min temp: 18ºC</p>
+						<p id="max_temp1" style="float: right; font-size: 1.3em">Min temp:26ºC</p>
+					</div>
+					<p style="clear: both;"/>
+				</div>
+				<div class="list_item">
+					<table style="width: 100%;">
+						<tr><td style="vertical-align: middle;">
+							<p id="date2" style="font-size: 1.3em">29/09/2011</p>
+						</td><td style="text-align: right;">
+							<img id="currentIcon2" src="http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png" style="vertical-align: middle;"/>
+						</td></tr>
+					</table>
+					<p id="condition2" style="font-size: 1.3em">Sunny</p>
+					<div style="padding-top: 0.5em">
+						<p id="min_temp2" style="float: left; font-size: 1.3em">Min temp: 18ºC</p>
+						<p id="max_temp2" style="float: right; font-size: 1.3em">Min temp:26ºC</p>
+					</div>
+					<p style="clear: both;"/>
+				</div>
+				<div class="list_item">
+					<table style="width: 100%;">
+						<tr><td style="vertical-align: middle;">
+							<p id="date3" style="font-size: 1.3em">29/09/2011</p>
+						</td><td style="text-align: right;">
+							<img id="currentIcon3" src="http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png" style="vertical-align: middle;"/>
+						</td></tr>
+					</table>
+					<p id="condition3" style="font-size: 1.3em">Sunny</p>
+					<div style="padding-top: 0.5em">
+						<p id="min_temp3" style="float: left; font-size: 1.3em">Min temp: 18ºC</p>
+						<p id="max_temp3" style="float: right; font-size: 1.3em">Min temp:26ºC</p>
+					</div>
+					<p style="clear: both;"/>
+				</div>
+				<div class="list_item">
+					<table style="width: 100%;">
+						<tr><td style="vertical-align: middle;">
+							<p id="date4" style="font-size: 1.3em">29/09/2011</p>
+						</td><td style="text-align: right;">
+							<img id="currentIcon4" src="http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png" style="vertical-align: middle;"/>
+						</td></tr>
+					</table>
+					<p id="condition4" style="font-size: 1.3em">Sunny</p>
+					<div style="padding-top: 0.5em">
+						<p id="min_temp4" style="float: left; font-size: 1.3em">Min temp: 18ºC</p>
+						<p id="max_temp4" style="float: right; font-size: 1.3em">Min temp:26ºC</p>
+					</div>
+					<p style="clear: both;"/>
+				</div>
+				
+			<div style="visibility: hidden;">
+			<table style="width: 100%; border-spacing: 0; padding: 0px; margin: 0px;">
+				<tr>
+					<td width="50%">
+					<div style="padding-right: 2px">
+						<div class="btn_large">
+							<img src="img/gps_location.png"/>
+							<p style="margin: 0px;">GPS location</p>
+						</div>
+						</div>
+					</td>
+					<td width="50%">
+					<div style="padding-left: 2px; padding-right: 8px">
+						<div class="btn_large">
+							<img src="img/city.png"/>
+							<p style="margin: 0px;">Select city</p>
+						</div>
+					</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+			</div>
+		</div>
+		
+		<div id="popup" style="display: none; background-color: rgba(0,0,0,0.5);">
+			<table style="width: 100%; height: 100%; border-spacing: 0; padding: 0px; margin: 0px;">
+				<tr><td style="vertical-align: middle;">
+					<div id="popup_content">
+						<p style="color: #000000; text-align: center; font-size: 2em; margin: 16px">Select city</p>
+						<hr size="1" width="94%" noshade align="center" style="color: #767676;"/>
+						<div style="color: #767676; padding-left: 3%; font-size: 1.7em;">
+							<p style="margin-bottom: 4; text-align: center;">Type a city name to get the weather forecast</p>
+							<p style="margin-bottom: 0;">City</p>
+						</div>
+						<p style="width: 100%; text-align: center; margin-bottom: 2em;"><input id="city_input" type="text" style="width: 94%; font-size: 1.7em;"></p>
+						<div style="width: 100%; font-size: 1.5em; margin-bottom: 2em">
+							<div class="button" style="width: 40%; float: left; margin-left: 4%;" onclick="javascript:GetCityLocationCancel();">Cancel</div>
+							<div class="button" style="width: 40%; float: right; margin-right: 4%;" onclick="javascript:GetCityLocationOk();">Ok</div>
+							<p style="clear: left;"/>
+						</div>
+					</div>
+				</td></tr>
+			</table>
+		</div>
+
+		<div id="popup_error" style="display: none; background-color: rgba(0,0,0,0.5);">
+			<table style="width: 100%; height: 100%; border-spacing: 0; padding: 0px; margin: 0px;">
+				<tr><td style="vertical-align: middle;">
+					<div id="popup_content">
+						<p style="color: #000000; text-align: center; font-size: 2em; margin: 16px">Error</p>
+						<hr size="1" width="94%" noshade align="center" style="color: #767676;"/>
+						<div style="color: #767676; padding-left: 3%; font-size: 1.7em;">
+							<p id="error_message" style="margin-bottom: 4; text-align: center;"></p>
+						</div>
+						<div style="width: 100%; font-size: 1.5em; margin-bottom: 2em; ">
+							<div class="button" style="width: 80%; margin:0 auto 0 auto;" onclick="javascript:PopupErrorOk();">Ok</div>
+						</div>
+					</div>
+				</td></tr>
+			</table>
+		</div>
+		
+		<div id="toolbar" style="display: none;">
+			<table style="width: 100%; border-spacing: 0; padding: 0px; margin: 0px;">
+				<tr>
+					<td width="50%">
+					<div style="padding-right: 2px">
+						<div class="btn_large" onclick="GetGPSLocation();">
+							<img src="img/gps_location.png"/>
+							<p style="margin: 0px;">GPS location</p>
+						</div>
+						</div>
+					</td>
+					<td width="50%">
+					<div style="padding-left: 2px; padding-right: 8px">
+						<div class="btn_large" onclick="GetCityLocation();">
+							<img src="img/city.png"/>
+							<p style="margin: 0px;">Select city</p>
+						</div>
+					</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

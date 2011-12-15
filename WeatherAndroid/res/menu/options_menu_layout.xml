@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item android:id="@+id/gps_location"
+		android:icon="@drawable/gps_location"
+		android:title="@string/gps_location_msg"/>
+		
+	<item android:id="@+id/city"
+		android:icon="@drawable/city"
+		android:title="@string/select_city_menu"/>
+				
+</menu>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<string name="help">There is no location preference saved.\n\nIn order to choose a location push the \'menu\' button to set a location using the GPS or typing one city.\n\nPreferences will be stored automatically when you set one location.</string>
+</resources>

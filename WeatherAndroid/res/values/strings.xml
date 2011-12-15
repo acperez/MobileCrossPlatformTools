@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, WeatherActivity!</string>
+    <string name="app_name">Weather</string>
+    
+    <string name="gps_timeout">Your location is temporarily unavailable</string>
+    
+    <string name="gps_location_msg">GPS location</string>
+    <string name="select_city_menu">Select city</string>
+    
+    <string name="alert_title">Select city</string>
+    <string name="alert_msg">Type a city name to get the weather forecast</string>
+    <string name="alert_ok_button">Ok</string>
+    <string name="alert_cancel_button">Cancel</string>
+    <string name="alert_form_title">City</string>
+    
+    <string name="alert_error_title">Error</string>
+    
+    <string name="help">There is no location preference saved.\n\nIn order to choose a location push the \'menu\' button to set a location using the GPS or typing one city.\n\nPreferences will be stored automatically when you set one location.</string>
+</resources>
