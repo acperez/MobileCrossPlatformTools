@@ -1,0 +1,12 @@
+"APP_NAME"="Tiempo";
+"Error" = "Error";
+"OK" = "OK";
+"Connection error" = "Error de conexión";
+"help" = "No hay ninguna preferencia de localización guardada.\nUse el menu inferior para escribir su ciudad o usar el GPS\n\nSus preferencias serán guardadas en cuanto seleccione una ciudad.";
+"Weather\nForecast" = "Previsión\nmetereológica";
+"Select city" = "Selección de ciudad";
+"Select City" = "Selección de ciudad";
+"Type a city name to get the weather forecast" = "Escriba una ciudad para obtener la previsión";
+"City" = "Ciudad";
+"GPS location" = "Localización GPS";
+"Cancel" = "Cancelar";

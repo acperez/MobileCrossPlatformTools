@@ -1,0 +1,35 @@
+#weather{
+    top: center/2 -20;
+    left: center;
+    font-size: 33;
+    font-weight: bold;
+    max-lines: 2;
+    text-align: center;
+}
+#splash {
+    background-style: vertical-gradient(#00517a, #51c6d9);
+}
+
+#sun{
+    image-style: scale-to-fit;
+    top: center;
+    left: center;
+    width: 200;
+    height: 200;
+}
+
+#loading{
+    bottom: center/2 - 20;
+    left: center;
+    animation-sequence: {
+        name: "loading";
+        loop: true;
+        fps: 10;
+    }
+}
+
+@volteo{
+    duration: 2;
+    rotation: 360;
+    repeat: true;
+}

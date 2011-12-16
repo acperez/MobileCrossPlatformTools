@@ -1,0 +1,72 @@
+<style src="weather.css" />
+<scene id="screen">
+    
+    <group id="data">
+        <label id="title_city" class="text_style" text="Barcelona, Spain" />
+        <img id="image" src="icon.png" />
+        <label id="date" class="text_style" text="14/11/2011" />
+        <label id="degrees" class="text_style" text="18ºC" />
+        <label id="partly" class="text_style" text="Partly Cloudy" />
+        <label id="min_temp_a" class="text_style" text="Min temp: 14ºC" />
+        <label id="max_temp_a" class="text_style" text="Max temp: 17ºC" />
+        <label id="pressure_a" class="text_style" text="Pressure: 1022mb" />
+        <label id="humidity_a" class="text_style" text="Humidity: 83%" />
+        <label id="cloud_a" class="text_style" text="Cloud cover: 50%" />
+        <label id="wind_a" class="text_style" text="Wind speed: 24km/h" />
+        <table id="forecast" />
+    </group>
+    
+    
+    <group id="help">
+        <label id="help_text" text="help" />
+    </group>
+    
+    <button id="gps_rect" class="city_gps_rect" command="1" normal="button_gps.png" over="button_gps_over.png" />
+    <img src="gps_location.png" id="gps_icon" />
+    <label id="gps_text" text="GPS location" />
+    
+    <button id="city_rect" class="city_gps_rect" command="2" normal="button_city.png" over="button_city_over.png" />
+    <img src="city.png" id="city_icon" />
+    <label id="city_text" text="Select City" />
+    
+    <rectangle id="shadow" />
+    <group id="select">
+        <label id="select_city" text="Select city" />
+        <label id="type" text="Type a city name to get the weather forecast" />
+        <label id="city" text="City" />
+        <rectangle id="line" />
+        <textfield id="text_city" placeholder="" />
+        <button id="cancel_button" command="100" normal="alert_button_idle.png" over="alert_button_on.png"/>
+        <label id="cancel_text" text="Cancel" />
+        <button id="ok_button" command="101" normal="alert_button_idle.png" over="alert_button_on.png"/>
+        <label id="ok_text" text="OK" />
+    </group>
+    <sprite pkg="package" play="loading" id="loading" />
+    
+    <action name="select_city">
+        <animate id="shadow" animation="show" />
+        <animate id="select" animation="show" />
+    </action>
+    
+    <action name="hide_select_city">
+        <animate id="shadow" animation="hide" />
+        <animate id="select" animation="hide" />
+    </action>
+
+    <action name="show_loading">
+        <animate id="shadow" animation="show" />
+        <animate id="loading" animation="show" />
+        <animate id="select" animation="hide" />
+    </action>
+
+    <action name="hide_loading">
+        <animate id="shadow" animation="hide" />
+        <animate id="loading" animation="hide" />
+    </action>
+    
+    <action name="show_help">
+        <animate id="data" animation="hide" />
+        <animate id="help" animation="show" />
+    </action>
+    
+</scene>
